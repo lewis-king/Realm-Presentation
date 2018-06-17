@@ -1,4 +1,4 @@
-import realm from '../db/schema/realm';
+import realm from '../db/realm';
 
 realm.write(() => {
   realm.create('Question',
@@ -7,5 +7,5 @@ realm.write(() => {
       question: "I scored the first goal in the World Cup 2018",
       acceptableAnswers: "Don't know yet...",
       answered: false,
-    }, true)
+    })
 });

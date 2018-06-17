@@ -1,4 +1,4 @@
-import realm from '../db/schema/realm';
+import realm from '../db/realm';
 
 realm.write(() => {
   const questions = realm.objects('Question');

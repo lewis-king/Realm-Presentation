@@ -10,6 +10,7 @@ import {
   Deck,
   Heading,
   Image,
+  Link,
   ListItem,
   List,
   Magic,
@@ -30,7 +31,10 @@ const images = {
   realm_customers: require('./assets/images/realm_customers.png'),
   benchmarks_counts: require('./assets/images/benchmarks_counts.png'),
   benchmarks_queries: require('./assets/images/benchmarks_queries.png'),
-  benchmarks_inserts: require('./assets/images/benchmarks_inserts.png')
+  benchmarks_inserts: require('./assets/images/benchmarks_inserts.png'),
+  realm_studio: require('./assets/images/realm_studio.png'),
+  react_native_state: require('./assets/images/react_native_state.png'),
+  competitors: require('./assets/images/competitors.png')
 };
 
 const theme = createTheme(
@@ -67,7 +71,7 @@ export default class Presentation extends React.Component {
           </Text>
             <Cite>by Lewis King</Cite>
             <br/>
-            <Cite>LinkedIn: lewis-king-08176639 </Cite>
+            <Cite>LinkedIn: lewis-robert-king</Cite>
             <Cite>GitHub: lewis-king </Cite>
         </Slide>
         <Slide transition={['fade']} bgColor="secondary">
@@ -78,7 +82,11 @@ export default class Presentation extends React.Component {
             Realm is a platform centred around a mobile-first database
           </Text>
         </Slide>
-        <Slide>
+        <Slide
+          notes="Lots of innovation in the server side space and not any in mobile/embedded space.
+                 SQLite was designed over 15 years ago for use on board the US Navy’s guided missile destroyers
+                 Mobile revolution with like of the iPhone released in 2007, mobiles are getting more powerful.
+                 Just like we've moved more to the client with innovations like the V8 engine, a gap has been present in the mobile space">
           <Image src={images.intro_realm_timeline.replace('/', '')}/>
         </Slide>
         <Slide transition={['fade']} bgColor="secondary" textColor="primary">
@@ -107,7 +115,7 @@ export default class Presentation extends React.Component {
           <CodePane
             lang="javascript"
             //code_snippets/realm/create_schema1.js
-            source={'//db/schema/realm.js\n' +
+            source={'//db/realm.js\n' +
             'import Realm from \'realm\';\n' +
             '\n' +
             'class Question extends Realm.Object {}\n' +
@@ -125,58 +133,73 @@ export default class Presentation extends React.Component {
             'export default new Realm({schema: [Question]});'}
           />
         </Slide>
-        <Slide transition={['fade']} bgColor="secondary" textColor="primary"
+        <Magic>
+        <Slide bgColor="secondary" textColor="primary"
           notes={"Non-read-only operations must take place in a 'Write' transaction block."}
         >
-          <Heading size={5} textColor="primary">
-            Ease of use
-          </Heading>
           <Heading size={6} textColor="primary">
             Create
           </Heading>
           <CodePane
             lang="javascript"
             //code_snippets/realm/write_schema1.js
-            source={'import realm from \'../db/schema/realm\';\n' +
+            source={'import realm from \'../db/realm\';\n' +
             '\n' +
             'realm.write(() => {\n' +
             '  realm.create(\'Question\',\n' +
             '    {\n' +
             '      id: 1,\n' +
-            '      question: "I scored the first goal in the World Cup 2018",\n' +
-            '      acceptableAnswers: "Don\'t know yet...",\n' +
+            '      question: "I scored the first goal in the 2018 World Cup",\n' +
+            '      acceptableAnswers: "",\n' +
             '      answered: false,\n' +
-            '    }, true)\n' +
+            '    })\n' +
             '});'}
           />
         </Slide>
-        <Slide transition={['fade']} bgColor="secondary" textColor="primary">
-          <Heading size={5} textColor="primary">
-            Ease of use
+        <Slide bgColor="secondary" textColor="primary"
+               notes={"Non-read-only operations must take place in a 'Write' transaction block."}
+        >
+          <Heading size={6} textColor="primary">
+            Create
           </Heading>
+          <CodePane
+            lang="javascript"
+            //code_snippets/realm/write_schema1.js
+            source={'import realm from \'../db/realm\';\n' +
+            '\n' +
+            'realm.write(() => {\n' +
+            '  realm.create(\'Question\',\n' +
+            '    {\n' +
+            '      id: 1,\n' +
+            '      question: "I scored the first goal in the 2018 World Cup",\n' +
+            '      acceptableAnswers: "Yury Gazinsky",\n' +
+            '      answered: false,\n' +
+            '    })\n' +
+            '});'}
+          />
+        </Slide>
+        </Magic>
+        <Slide transition={['fade']} bgColor="secondary" textColor="primary">
           <Heading size={6} textColor="primary">
             Read
           </Heading>
           <CodePane
             lang="javascript"
             //code_snippets/realm/read_schema1.js
-            source={'import realm from \'../db/schema/realm\';\n' +
+            source={'import realm from \'../db/realm\';\n' +
             '\n' +
             'const questions = realm.objects("Question");'}
           />
         </Slide>
         <Magic>
           <Slide bgColor="secondary" textColor="primary">
-            <Heading size={5} textColor="primary">
-              Ease of use
-            </Heading>
             <Heading size={6} textColor="primary">
               Update
             </Heading>
             <CodePane
               lang="javascript"
               //code_snippets/realm/update_schema1.js
-              source={'import realm from \'../db/schema/realm\';\n' +
+              source={'import realm from \'../db/realm\';\n' +
               '\n' +
               'realm.write(() => {\n' +
               '  realm.create(\'Question\', {id: 1, answered: true}, true);\n' +
@@ -184,16 +207,13 @@ export default class Presentation extends React.Component {
             />
           </Slide>
           <Slide bgColor="secondary" textColor="primary">
-            <Heading size={5} textColor="primary">
-              Ease of use
-            </Heading>
             <Heading size={6} textColor="primary">
               Update 2
             </Heading>
             <CodePane
               lang="javascript"
               //code_snippets/realm/update_schema1.js
-              source={'import realm from \'../db/schema/realm\';\n' +
+              source={'import realm from \'../db/realm\';\n' +
               '\n' +
               'realm.write(() => {\n' +
               '  question.answered = true;\n' +
@@ -202,16 +222,13 @@ export default class Presentation extends React.Component {
           </Slide>
         </Magic>
         <Slide transition={['fade']} bgColor="secondary" textColor="primary">
-          <Heading size={5} textColor="primary">
-            Ease of use
-          </Heading>
           <Heading size={6} textColor="primary">
             Delete
           </Heading>
           <CodePane
             lang="javascript"
             //code_snippets/realm/update_schema1.js
-            source={'import realm from \'../db/schema/realm\';\n' +
+            source={'import realm from \'../db/realm\';\n' +
             '\n' +
             'realm.write(() => {\n' +
             '  const questions = realm.objects(\'Question\');\n' +
@@ -239,16 +256,13 @@ export default class Presentation extends React.Component {
           />
         </Slide>
         <Slide transition={['fade']} bgColor="secondary" textColor="primary">
-          <Heading size={5} textColor="primary">
-            Ease of use
-          </Heading>
           <Heading size={6} textColor="primary">
             Querying
           </Heading>
           <CodePane
             lang="javascript"
             //code_snippets/realm/update_schema1.js
-            source={'import realm from \'../db/schema/realm\';\n' +
+            source={'import realm from \'../db/realm\';\n' +
             '\n' +
             'let unansweredQuestions = realm.objects(\'Question\').filtered(\'answered == false\').sorted(\'id\');'}
           />
@@ -262,10 +276,10 @@ export default class Presentation extends React.Component {
             Query language inspired by Apple's NSPredicate
           </Heading>
           <List>
-            <Text fit={true}>Basic Comparison - <Code>{codeSnippets.basicOperations}</Code> <br/>
-            Compound Operators - <Code>AND / &&, OR / ||, NOT / !</Code> <br/>
-            String Comparison - <Code>BEGINSWITH, CONTAINS, ENDSWITH, LIKE</Code> <br/>
-            Aggregate Expressions - <Code>@count/@size, @min, @max, @sum and @avg</Code> <br/>
+            <Text fit={true} textColor="primary">Basic Comparison - <Code>{codeSnippets.basicOperations}</Code> <br/><br/>
+            Compound Operators - <Code>AND / &&, OR / ||, NOT / !</Code> <br/><br/>
+            String Comparison - <Code>BEGINSWITH, CONTAINS, ENDSWITH, LIKE</Code> <br/><br/>
+            Aggregate Expressions - <Code>@count/@size, @min, @max, @sum and @avg</Code> <br/><br/>
             Argument substitution - <Code>$ e.g. country.population >= $0</Code></Text>
           </List>
         </Slide>
@@ -276,7 +290,7 @@ export default class Presentation extends React.Component {
           <CodePane
             lang="javascript"
             //code_snippets/realm/update_schema1.js
-            source={'//db/schema/realm.js\n' +
+            source={'//db/realm.js\n' +
             'import Realm from "realm";\n' +
             '\n' +
             'class Question extends Realm.Object {}\n' +
@@ -313,7 +327,7 @@ export default class Presentation extends React.Component {
           <CodePane
             lang="javascript"
             //code_snippets/realm/update_schema1.js
-            source={'//db/schema/realm.js\n' +
+            source={'//db/realm.js\n' +
             'export default new Realm({\n' +
             '  schema: [Question, Clues],\n' +
             '  schemaVersion: 1,\n' +
@@ -331,6 +345,12 @@ export default class Presentation extends React.Component {
             '});'}
           />
         </Slide>
+        <Slide transition={['fade']} bgColor="secondary" textColor="primary">
+          <Heading size={5} textColor="primary">
+            Map to state
+          </Heading>
+          <Image height={518} width={650} src={images.react_native_state.replace('/', '')}/>
+        </Slide>
         <Slide bgColor="secondary" textColor="primary">
           <Heading size={5} textColor="primary">
             Performance
@@ -342,7 +362,12 @@ export default class Presentation extends React.Component {
           </List>
         </Slide>
         <Magic>
-          <Slide bgColor="secondary" textColor="primary">
+          <Slide bgColor="secondary" textColor="primary"
+            note={"SQLite - Low-level, full access to database. No abstractions. Very verbose - it takes a good deal of code to do very simple things." +
+                  "Core Data - Core Data is an object graph and persistence framework provided by Apple. High Level built on abstractions." +
+                  "FMDB - This is an Objective-C wrapper around SQLite" +
+                  "Couchbase Lite - Couchbase Lite is the renamed version of what was previously TouchDB." +
+                  "It allows you to have database directly on mobile device storage"}>
             <Heading size={5} textColor="primary">
               Queries
             </Heading>
@@ -355,15 +380,28 @@ export default class Presentation extends React.Component {
             <Image src={images.benchmarks_inserts.replace('/', '')}/>
           </Slide>
         </Magic>
-        <Slide transition={['fade']} bgColor="secondary" textColor="primary">
-          <Heading size={5} textColor="primary">
-            Trends
-          </Heading>
-        </Slide>
-        <Slide transition={['fade']} bgColor="secondary" textColor="primary">
+        <Slide transition={['fade']} bgColor="secondary" textColor="primary"
+          notes={"Realm Sync - realtime encrypted data sync across devices and server" +
+          "Realm Studio - dashboard built on Electron" +
+          "Realm Connect - converts REST APIs to live objects" +
+          "Event Handling - react to data changes server-side"}>
           <Heading size={5} textColor="primary">
             Realm Platform
           </Heading>
+          <List>
+            <ListItem>Realm Sync</ListItem>
+            <ListItem>Realm Studio</ListItem>
+            <ListItem>Realm Connect</ListItem>
+            <ListItem>Event Handling</ListItem>
+            <ListItem>Permissions and Authentication</ListItem>
+            <ListItem>Mostly Professional Edition and Enterprise Edition features ($$$)</ListItem>
+          </List>
+        </Slide>
+        <Slide transition={['fade']} bgColor="secondary" textColor="primary">
+          <Heading size={5} textColor="primary">
+            Realm Studio
+          </Heading>
+          <Image src={images.realm_studio.replace('/', '')}/>
         </Slide>
         <Slide transition={['fade']} bgColor="secondary" textColor="primary">
           <Heading size={5} textColor="primary">
@@ -371,21 +409,34 @@ export default class Presentation extends React.Component {
           </Heading>
           <Image src={images.realm_customers.replace('/', '')}/>
         </Slide>
-        <Slide transition={['fade']} bgColor="secondary" textColor="primary">
-          <BlockQuote>
-            <Text textColor="primary" italic={true}>We are database, but we’re very different from every other database out there. We’re really an object database. Which is so close to the language that it’s even hard to call a database. It’s just objects.</Text>
-            {/*<Quote>We are database, but we’re very different from every other database out there. We’re really an object database. Which is so close to the language that it’s even hard to call a database. It’s just objects. The fact that they can be persisted and created and all the things you can do with a database is kind of a side benefit.</Quote>*/}
-            <Cite>Alexander Stigsen (CEO & co-founder of Realm)</Cite>
-          </BlockQuote>
-        </Slide>
-        <Slide transition={['fade']} bgColor="secondary" textColor="primary">
+        <Slide transition={['fade']} bgColor="secondary" textColor="primary"
+          notes="SQLite - is a relational database management system.
+                RocksDB - persistent key-value store developed by Facebook.
+                          AsyncStorage is a simple, unencrypted, asynchronous, persistent, key-value storage system that is global to the app
+                Firebase - Cloud Firestore - Cloud Firestore is a flexible, scalable database for mobile, web, and server development from Firebase and Google Cloud Platform.
+                           Cloud Firestore caches data that your app is actively using, so the app can write, read, listen to, and query data even if the device is offline
+                           Firebase most likely using MongoDB on the server and SQLite locally but this is opaque and not relevant to the API
+                           Easy integration into other Google Cloud Platform offerings.">
           <Heading size={5} textColor="primary">
             Competitors
           </Heading>
-          <Heading size={6} textColor="primary">
-            Firebase - Cloud Firestore
+          <List>
+            <ListItem>SQLite</ListItem>
+            <ListItem>RocksDB</ListItem>
+            <ListItem>Firebase - Cloud Firestore</ListItem>
+          </List>
+          <Image src={images.competitors.replace('/', '')}/>
+        </Slide>
+        <Slide transition={['fade']} bgColor="secondary" textColor="primary"
+          notes="Similar to frameworks and approaches like React, Node, MongoDB with Mongoose where you can apply similar patterns and use the same language across all layers of the stack">
+          <Heading size={5} textColor="primary">
+            Thank you!
           </Heading>
-          <Image src={images.realm_customers.replace('/', '')}/>
+          <BlockQuote>
+            <Text textColor="primary" italic={true}>We are a database, but we’re very different from every other database out there. We’re really an object database. Which is so close to the language that it’s even hard to call a database. It’s just objects.</Text>
+            {/*<Quote>We are database, but we’re very different from every other database out there. We’re really an object database. Which is so close to the language that it’s even hard to call a database. It’s just objects. The fact that they can be persisted and created and all the things you can do with a database is kind of a side benefit.</Quote>*/}
+            <Cite>Alexander Stigsen (CEO & co-founder of Realm)</Cite>
+          </BlockQuote>
         </Slide>
       </Deck>
     );

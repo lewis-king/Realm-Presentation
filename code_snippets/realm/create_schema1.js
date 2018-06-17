@@ -1,4 +1,4 @@
-//db/schema/realm.js
+//db/realm.js
 import Realm from 'realm';
 
 class Question extends Realm.Object {}
