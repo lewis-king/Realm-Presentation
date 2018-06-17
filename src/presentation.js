@@ -125,7 +125,7 @@ export default class Presentation extends React.Component {
             '  properties: {\n' +
             '    id: \'int\',\n' +
             '    question: \'string\',\n' +
-            '    acceptableAnswers: \'string\',\n' +
+            '    acceptableAnswers: \'string[]\',\n' +
             '    answered: \'bool\'\n' +
             '  }\n' +
             '};\n' +
@@ -150,7 +150,7 @@ export default class Presentation extends React.Component {
             '    {\n' +
             '      id: 1,\n' +
             '      question: "I scored the first goal in the 2018 World Cup",\n' +
-            '      acceptableAnswers: "",\n' +
+            '      acceptableAnswers: [""],\n' +
             '      answered: false,\n' +
             '    })\n' +
             '});'}
@@ -172,7 +172,7 @@ export default class Presentation extends React.Component {
             '    {\n' +
             '      id: 1,\n' +
             '      question: "I scored the first goal in the 2018 World Cup",\n' +
-            '      acceptableAnswers: "Yury Gazinsky",\n' +
+            '      acceptableAnswers: ["Yury Gazinsky", "Gazinsky"],\n' +
             '      answered: false,\n' +
             '    })\n' +
             '});'}
@@ -300,7 +300,7 @@ export default class Presentation extends React.Component {
             '  properties: {\n' +
             '    id: \'int\',\n' +
             '    question: \'string\',\n' +
-            '    acceptableAnswers: \'string\',\n' +
+            '    acceptableAnswers: \'string[]\',\n' +
             '    answered: \'bool\',\n' +
             '    clues: \'Clues\',\n' +
             '  }\n' +

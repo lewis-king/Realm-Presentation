@@ -8,7 +8,7 @@ Question.schema = {
   properties: {
     id: 'int',
     question: 'string',
-    acceptableAnswers: 'string',
+    acceptableAnswers: 'string[]',
     answered: 'bool',
     clues: 'Clues',
   }
