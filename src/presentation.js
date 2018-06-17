@@ -10,11 +10,9 @@ import {
   Deck,
   Heading,
   Image,
-  Link,
   ListItem,
   List,
   Magic,
-  Quote,
   Slide,
   Text,
 } from 'spectacle';
