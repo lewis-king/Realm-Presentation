@@ -349,7 +349,11 @@ export default class Presentation extends React.Component {
           </Heading>
           <Image height={518} width={650} src={images.react_native_state.replace('/', '')}/>
         </Slide>
-        <Slide bgColor="secondary" textColor="primary">
+        <Slide bgColor="secondary" textColor="primary"
+          notes="ORM abstraction is leaky because ORM simply converts Objects and their methods into SQL statements
+                 Zero copy - the traditional way of reading data from a database leads to unnecessary copying (raw data -> deserialized representation -> language-level objects
+                 Lazy loading - because the properties are represented in columns instead of rows, it can lazy load the properties as necessary and because of the column structure, reads are much faster, while inserts are slower. But that is a good trade-off to make in the context of a mobile application.
+                 MVCC (Multiversion Concurrency Control) - multiple read transactions can be done at the same time and reads can also be done while a write transaction is being committed">
           <Heading size={5} textColor="primary">
             Performance
           </Heading>
@@ -378,7 +382,7 @@ export default class Presentation extends React.Component {
             <Image src={images.benchmarks_inserts.replace('/', '')}/>
           </Slide>
         </Magic>
-        <Slide transition={['fade']} bgColor="secondary" textColor="primary"
+        <Slide bgColor="secondary" textColor="primary"
           notes={"Realm Sync - realtime encrypted data sync across devices and server" +
           "Realm Studio - dashboard built on Electron" +
           "Realm Connect - converts REST APIs to live objects" +
@@ -425,7 +429,7 @@ export default class Presentation extends React.Component {
           </List>
           <Image src={images.competitors.replace('/', '')}/>
         </Slide>
-        <Slide transition={['fade']} bgColor="secondary" textColor="primary"
+        <Slide transition={['zoom']} bgColor="secondary" textColor="primary"
           notes="Similar to frameworks and approaches like React, Node, MongoDB with Mongoose where you can apply similar patterns and use the same language across all layers of the stack">
           <Heading size={5} textColor="primary">
             Thank you!
